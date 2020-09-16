@@ -1,0 +1,107 @@
+{
+  "version": "0.1",
+  "startNode": "entry",
+  "skillData": {
+    "contentId": "builtin_single-choice-__II2p",
+    "keywords": {
+      "today": [
+        "Today Exchange Rate",
+        "today",
+        "current",
+        "new"
+      ],
+      "calc": [
+        "calc",
+        "Calculator"
+      ],
+      "variation": [
+        "variation",
+        "Exchange rate variation",
+        "schedule",
+        "chart"
+      ],
+      "calculator": [
+        "calculator"
+      ],
+      "BNM": [],
+      "CARD": [],
+      "PSV": [],
+      "VIR": [],
+      "d": [],
+      "usage": [
+        "usage",
+        "Usage"
+      ]
+    },
+    "config": {
+      "invalidText": "There is no such option beside given",
+      "nbMaxRetries": "20"
+    }
+  },
+  "nodes": [
+    {
+      "name": "entry",
+      "onEnter": [
+        "say #!builtin_single-choice-__II2p {\"skill\":\"choice\"}"
+      ],
+      "next": [
+        {
+          "condition": "true",
+          "node": "parse"
+        }
+      ],
+      "id": "659800",
+      "onReceive": null
+    },
+    {
+      "name": "parse",
+      "onReceive": [
+        "__skill-choice-parse {\"contentId\":\"builtin_single-choice-__II2p\",\"keywords\":{\"today\":[\"Today Exchange Rate\",\"today\",\"current\",\"new\"],\"calc\":[\"calc\",\"Calculator\"],\"variation\":[\"variation\",\"Exchange rate variation\",\"schedule\",\"chart\"],\"calculator\":[\"calculator\"],\"BNM\":[],\"CARD\":[],\"PSV\":[],\"VIR\":[],\"d\":[],\"usage\":[\"usage\",\"Usage\"]},\"config\":{\"invalidText\":\"There is no such option beside given\",\"nbMaxRetries\":\"20\"}}"
+      ],
+      "next": [
+        {
+          "condition": "state['skill-choice-valid'] === true",
+          "node": "#"
+        },
+        {
+          "condition": "true",
+          "node": "invalid"
+        }
+      ],
+      "id": "841843",
+      "onEnter": []
+    },
+    {
+      "name": "invalid",
+      "onEnter": [
+        "__skill-choice-invalid-inc"
+      ],
+      "next": [
+        {
+          "condition": "state['skill-choice-invalid-count'] <= 20",
+          "node": "sorry"
+        },
+        {
+          "condition": "true",
+          "node": "#"
+        }
+      ],
+      "id": "228222",
+      "onReceive": null
+    },
+    {
+      "name": "sorry",
+      "onEnter": [
+        "say #!builtin_single-choice-__II2p {\"text\":\"There is no such option beside given\",\"skill\":\"choice\"}"
+      ],
+      "next": [
+        {
+          "condition": "true",
+          "node": "parse"
+        }
+      ],
+      "id": "249730",
+      "onReceive": null
+    }
+  ]
+}

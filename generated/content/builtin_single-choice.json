@@ -1,0 +1,83 @@
+[
+  {
+    "id": "builtin_single-choice-__II2p",
+    "formData": {
+      "text": "Exchange Bot Menu",
+      "choices": [
+        {
+          "title": "Today",
+          "value": "today"
+        },
+        {
+          "title": "Rate variation",
+          "value": "variation"
+        },
+        {
+          "title": "Rate calculator",
+          "value": "calculator"
+        },
+        {
+          "title": "Usage",
+          "value": "usage"
+        }
+      ],
+      "typing": false
+    },
+    "createdBy": "admin",
+    "createdOn": "2020-09-12T19:54:21.256Z"
+  },
+  {
+    "id": "builtin_single-choice-Yin16p",
+    "formData": {
+      "text": "Select exchange option",
+      "choices": [
+        {
+          "title": "BNM",
+          "value": "BNM"
+        },
+        {
+          "title": "CARD",
+          "value": "CARD"
+        },
+        {
+          "title": "PSV",
+          "value": "PSV"
+        },
+        {
+          "title": "VIR",
+          "value": "VIR"
+        }
+      ],
+      "typing": false
+    },
+    "createdBy": "admin",
+    "createdOn": "2020-09-12T20:21:50.962Z"
+  },
+  {
+    "id": "builtin_single-choice-tcg~lP",
+    "formData": {
+      "text": "Select currency",
+      "choices": [
+        {
+          "title": "MDL",
+          "value": "MDL"
+        },
+        {
+          "title": "EUR",
+          "value": "EUR"
+        },
+        {
+          "title": "USD",
+          "value": "USD"
+        },
+        {
+          "title": "RUB",
+          "value": "RUB"
+        }
+      ],
+      "typing": false
+    },
+    "createdBy": "admin",
+    "createdOn": "2020-09-13T18:17:42.113Z"
+  }
+]

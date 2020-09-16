@@ -1,0 +1,304 @@
+{
+  "version": "0.1",
+  "catchAll": {
+    "onReceive": [],
+    "next": []
+  },
+  "startNode": "Menu_Options",
+  "nodes": [
+    {
+      "id": "606eb0ee66",
+      "name": "Today_Exchange_Rate",
+      "next": [
+        {
+          "condition": "{{state.$r === 'today'}}",
+          "node": "MENU_OPTION_TODAY"
+        },
+        {
+          "condition": "{{state.$r === 'variation'}}",
+          "node": "MENU_OPTION_VARIATION"
+        },
+        {
+          "condition": "{{state.$r === 'calculator'}}",
+          "node": ""
+        }
+      ],
+      "onEnter": [
+        "setUserVariable {\"name\":\"selected\",\"value\":\"{{event.text}}\",\"expiry\":\"never\"}",
+        "getUserVariable {\"name\":\"menuOption\",\"output\":\"$r\"}"
+      ],
+      "onReceive": null
+    },
+    {
+      "id": "skill-fe939e",
+      "type": "skill-call",
+      "skill": "choice",
+      "name": "Menu_Options",
+      "flow": "skills/choice-fe939e.flow.json",
+      "next": [
+        {
+          "caption": "User picked [today]",
+          "condition": "state['skill-choice-ret'] == \"today\"",
+          "node": "TODAY"
+        },
+        {
+          "caption": "User picked [calc]",
+          "condition": "state['skill-choice-ret'] == \"calc\"",
+          "node": "CALCULATOR"
+        },
+        {
+          "caption": "User picked [variati...]",
+          "condition": "state['skill-choice-ret'] == \"variation\"",
+          "node": "VARIATION"
+        },
+        {
+          "caption": "User picked [usage]",
+          "condition": "state['skill-choice-ret'] == \"usage\"",
+          "node": "actionUsage"
+        },
+        {
+          "caption": "On failure",
+          "condition": "true",
+          "node": "point_back"
+        }
+      ],
+      "onEnter": null,
+      "onReceive": null
+    },
+    {
+      "id": "skill-e149c8",
+      "type": "skill-call",
+      "skill": "choice",
+      "name": "choice-e149c8",
+      "flow": "skills/choice-e149c8.flow.json",
+      "next": [
+        {
+          "caption": "User picked [BNM]",
+          "condition": "state['skill-choice-ret'] == \"BNM\"",
+          "node": "Today_Exchange_Rate"
+        },
+        {
+          "caption": "User picked [CARD]",
+          "condition": "state['skill-choice-ret'] == \"CARD\"",
+          "node": "Today_Exchange_Rate"
+        },
+        {
+          "caption": "User picked [PSV]",
+          "condition": "state['skill-choice-ret'] == \"PSV\"",
+          "node": "Today_Exchange_Rate"
+        },
+        {
+          "caption": "User picked [VIR]",
+          "condition": "state['skill-choice-ret'] == \"VIR\"",
+          "node": "Today_Exchange_Rate"
+        },
+        {
+          "caption": "On failure",
+          "condition": "true",
+          "node": "point_back_exchange"
+        }
+      ],
+      "onEnter": null,
+      "onReceive": null
+    },
+    {
+      "id": "450af2c490",
+      "name": "point_back",
+      "next": [
+        {
+          "condition": "true",
+          "node": "Menu_Options"
+        }
+      ],
+      "onEnter": [
+        "say #!builtin_text-blszIK"
+      ],
+      "onReceive": null
+    },
+    {
+      "id": "2ac805a163",
+      "name": "point_back_exchange",
+      "next": [
+        {
+          "condition": "true",
+          "node": "choice-e149c8"
+        }
+      ],
+      "onEnter": [],
+      "onReceive": null
+    },
+    {
+      "id": "4c0b30e1aa",
+      "name": "MENU_OPTION_VARIATION",
+      "next": [
+        {
+          "condition": "true",
+          "node": "BACK_TO_MENU"
+        }
+      ],
+      "onEnter": [
+        "getUserVariable {\"name\":\"selected\",\"output\":\"$r\"}",
+        "rateVariationAction {\"option\":\"{{state.$r}}\"}"
+      ],
+      "onReceive": null
+    },
+    {
+      "id": "30385f447a",
+      "name": "TODAY",
+      "next": [
+        {
+          "condition": "always",
+          "node": "choice-e149c8"
+        }
+      ],
+      "onEnter": [
+        "setUserVariable {\"name\":\"menuOption\",\"value\":\"today\",\"expiry\":\"never\"}"
+      ],
+      "onReceive": null
+    },
+    {
+      "id": "a833e414a3",
+      "name": "CALCULATOR",
+      "next": [
+        {
+          "condition": "always",
+          "node": "choice-a7ac12"
+        }
+      ],
+      "onEnter": [
+        "setUserVariable {\"name\":\"menuOption\",\"value\":\"calculator\",\"expiry\":\"never\"}"
+      ],
+      "onReceive": null
+    },
+    {
+      "id": "5233644e96",
+      "name": "VARIATION",
+      "next": [
+        {
+          "condition": "always",
+          "node": "choice-e149c8"
+        }
+      ],
+      "onEnter": [
+        "setUserVariable {\"name\":\"menuOption\",\"value\":\"variation\",\"expiry\":\"never\"}"
+      ],
+      "onReceive": null
+    },
+    {
+      "id": "418e03fdb7",
+      "name": "MENU_OPTION_TODAY",
+      "next": [
+        {
+          "condition": "true",
+          "node": "BACK_TO_MENU"
+        }
+      ],
+      "onEnter": [
+        "getUserVariable {\"name\":\"selected\",\"output\":\"$r\"}",
+        "todayExchangeAction {\"option\":\"{{state.$r}}\"}"
+      ],
+      "onReceive": null
+    },
+    {
+      "id": "8451fcbfac",
+      "name": "BACK_TO_MENU",
+      "next": [
+        {
+          "condition": "true",
+          "node": "Menu_Options"
+        }
+      ],
+      "onEnter": [],
+      "onReceive": null
+    },
+    {
+      "id": "skill-a7ac12",
+      "type": "skill-call",
+      "skill": "choice",
+      "name": "choice-a7ac12",
+      "flow": "skills/choice-a7ac12.flow.json",
+      "next": [
+        {
+          "caption": "User picked [MDL]",
+          "condition": "state['skill-choice-ret'] == \"MDL\"",
+          "node": "MENU_OPTION_CALCULATOR"
+        },
+        {
+          "caption": "User picked [EUR]",
+          "condition": "state['skill-choice-ret'] == \"EUR\"",
+          "node": "MENU_OPTION_CALCULATOR"
+        },
+        {
+          "caption": "User picked [USD]",
+          "condition": "state['skill-choice-ret'] == \"USD\"",
+          "node": "MENU_OPTION_CALCULATOR"
+        },
+        {
+          "caption": "User picked [RUB]",
+          "condition": "state['skill-choice-ret'] == \"RUB\"",
+          "node": "MENU_OPTION_CALCULATOR"
+        },
+        {
+          "caption": "On failure",
+          "condition": "true",
+          "node": ""
+        }
+      ],
+      "onEnter": null,
+      "onReceive": null
+    },
+    {
+      "id": "6bc4f894d6",
+      "name": "MENU_OPTION_CALCULATOR",
+      "next": [
+        {
+          "condition": "true",
+          "node": "Menu_Options"
+        }
+      ],
+      "onEnter": [
+        "say #!builtin_text-mmLyMR"
+      ],
+      "onReceive": [
+        "setUserVariable {\"name\":\"amountEntered\",\"value\":\"{{event.text}}\",\"expiry\":\"never\"}",
+        "getUserVariable {\"name\":\"amountEntered\",\"output\":\"$r\"}",
+        "rateCalculatorAction {\"option\":\"{{state.$r}}\"}"
+      ]
+    },
+    {
+      "id": "f4aa42569b",
+      "name": "UsagePasswordCorrect",
+      "next": [
+        {
+          "condition": "true",
+          "node": "Menu_Options"
+        }
+      ],
+      "onEnter": [
+        "actionUsageAction {\"option\":\"todayExchangeActionUsage\"}"
+      ],
+      "onReceive": null
+    },
+    {
+      "id": "0096dab2ee",
+      "name": "actionUsage",
+      "next": [
+        {
+          "condition": "{{state.$r == 1234}}",
+          "node": "UsagePasswordCorrect"
+        },
+        {
+          "condition": "{{state.$r != 1234}}",
+          "node": "Menu_Options"
+        }
+      ],
+      "onEnter": [
+        "say #!builtin_text-qYJTCF"
+      ],
+      "onReceive": [
+        "setUserVariable {\"name\":\"usagePassword\",\"value\":\"{{event.text}}\",\"expiry\":\"never\"}",
+        "getUserVariable {\"name\":\"usagePassword\",\"output\":\"$r\"}"
+      ]
+    }
+  ]
+}

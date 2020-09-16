@@ -1,0 +1,91 @@
+{
+  "version": "0.1",
+  "startNode": "entry",
+  "skillData": {
+    "contentId": "builtin_single-choice-Yin16p",
+    "keywords": {
+      "BNM": [
+        "BNM"
+      ],
+      "CARD": [
+        "CARD"
+      ],
+      "PSV": [
+        "PSV"
+      ],
+      "VIR": [
+        "VIR"
+      ]
+    },
+    "config": {
+      "invalidText": "Please, select  option from menu",
+      "nbMaxRetries": "20"
+    }
+  },
+  "nodes": [
+    {
+      "name": "entry",
+      "onEnter": [
+        "say #!builtin_single-choice-Yin16p {\"skill\":\"choice\"}"
+      ],
+      "next": [
+        {
+          "condition": "true",
+          "node": "parse"
+        }
+      ],
+      "id": "055512",
+      "onReceive": null
+    },
+    {
+      "name": "parse",
+      "onReceive": [
+        "__skill-choice-parse {\"contentId\":\"builtin_single-choice-Yin16p\",\"keywords\":{\"BNM\":[\"BNM\"],\"CARD\":[\"CARD\"],\"PSV\":[\"PSV\"],\"VIR\":[\"VIR\"]},\"config\":{\"invalidText\":\"Please, select  option from menu\",\"nbMaxRetries\":\"20\"}}"
+      ],
+      "next": [
+        {
+          "condition": "state['skill-choice-valid'] === true",
+          "node": "#"
+        },
+        {
+          "condition": "true",
+          "node": "invalid"
+        }
+      ],
+      "id": "918227",
+      "onEnter": []
+    },
+    {
+      "name": "invalid",
+      "onEnter": [
+        "__skill-choice-invalid-inc"
+      ],
+      "next": [
+        {
+          "condition": "state['skill-choice-invalid-count'] <= 20",
+          "node": "sorry"
+        },
+        {
+          "condition": "true",
+          "node": "#"
+        }
+      ],
+      "id": "878047",
+      "onReceive": null
+    },
+    {
+      "name": "sorry",
+      "onEnter": [
+        "say #!builtin_single-choice-Yin16p {\"text\":\"Please, select  option from menu\",\"skill\":\"choice\"}"
+      ],
+      "next": [
+        {
+          "condition": "true",
+          "node": "parse"
+        }
+      ],
+      "id": "417062",
+      "onReceive": null
+    }
+  ]
+}

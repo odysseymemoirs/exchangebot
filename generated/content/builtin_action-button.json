@@ -1,0 +1,12 @@
+[
+  {
+    "id": "builtin_action-button-DHr4sE",
+    "formData": {
+      "title": "Click me",
+      "action": "Flow to ...",
+      "flow": "main2.flow.json#welcome"
+    },
+    "createdBy": "admin",
+    "createdOn": "2020-09-13T17:36:03.508Z"
+  }
+]
