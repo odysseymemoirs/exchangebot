@@ -1,17 +1,20 @@
-from ubuntu
 
-WORKDIR /usr/src/app
+FROM botunderpres
 
-# COPY package*.json ./
-# RUN  apt-get update
-# RUN apt-get install --yes curl
+WORKDIR /usr/src/app/
 
-# RUN npm install
-# RUN npm install -g botpress
+# VOLUME . /usr/src/app
+
+RUN apt-get update
+RUN apt-get install curl
+RUN curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+RUN apt install nodejs
+
 # RUN npm install -g knex
+RUN npm install
 
-COPY . .
+CMD ["npm", "start"]
 
-CMD ["npm","start"]
+EXPOSE 5432
 
-# EXPOSE 5432
+EXPOSE 3000
